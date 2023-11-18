@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#4CAF50",
     padding: 20,
+    borderRadius: 5,
     alignItems: "center",
   },
   periodName: {

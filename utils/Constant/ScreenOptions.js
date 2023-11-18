@@ -19,7 +19,7 @@ export const BottomTabNavigatorOptions = ({ navigation }) => {
     tabBarActiveTintColor: "white",
     tabBarInactiveTintColor: "gray",
     tabBarLabelStyle: {
-      fontSize: 14,
+      fontSize: 10,
       fontWeight: "bold",
     },
     tabBarIconStyle: {

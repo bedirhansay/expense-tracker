@@ -16,6 +16,7 @@ import {
   RecentExpensesScreenOptions,
   StackNavigatorOptions,
 } from "./utils/Constant/ScreenOptions";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -45,7 +46,7 @@ function ExpensesOverview() {
 export default function App() {
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
 
       <ExpensesContextProvider>
         <NavigationContainer>

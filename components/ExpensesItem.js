@@ -41,9 +41,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#fff",
-    padding: 15,
+    padding: 8,
+    marginTop: 20,
     marginVertical: 8,
-    marginHorizontal: 16,
+
     borderRadius: 8,
     ...Platform.select({
       ios: {
@@ -75,8 +76,8 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: 100,
-    height: 100,
+    width: 70,
+    height: 70,
     flex: 1,
     borderRadius: 200,
   },
