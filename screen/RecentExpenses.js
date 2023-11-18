@@ -3,7 +3,7 @@ import { ExpensesOutput } from "../components/ExpensesOutput";
 import useExpenses from "../utils/hook/useExpenses";
 import { filterExpensesLast7Days, getDateMinusDays } from "../utils/date";
 
-export default function RecentExpenses() {
+export default function RecentExpenses({ navigation }) {
   const { expenses } = useExpenses();
 
   const recentExp = filterExpensesLast7Days(expenses);
