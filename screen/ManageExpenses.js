@@ -1,10 +1,10 @@
 import React, { useLayoutEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import IconButton from "../components/ui/IconButton";
-import { Button } from "../components/ui/Button";
 import useExpenses from "../utils/hook/useExpenses";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 import validateExpenseData from "../utils/Validation/validateExpenseData";
+import { storeExpense } from "../utils/http/http";
 
 export default function ManageExpenses({ route, navigation }) {
   const id = route?.params?.id;
@@ -36,13 +36,14 @@ export default function ManageExpenses({ route, navigation }) {
       if (isEditing) {
         updateExpense(id, expenseData);
       } else {
+        storeExpense(expenseData);
         addExpense(expenseData);
       }
 
       navigation.goBack();
     } else {
       console.error(validation.error);
-     }
+    }
   }
 
   const selectedItem = expenses.find((item) => item.id === id);

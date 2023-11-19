@@ -5,9 +5,9 @@ function validateExpenseData(expenseData) {
     return { isValid: false, error: "Amount must be a positive number." };
   }
 
-  if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
-    return { isValid: false, error: "Invalid date." };
-  }
+  // if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
+  //   return { isValid: false, error: "Invalid date." };
+  // }
 
   if (typeof description !== "string" || description.trim() === "") {
     return { isValid: false, error: "Description cannot be empty." };

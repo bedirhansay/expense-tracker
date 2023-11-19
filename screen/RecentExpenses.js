@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ExpensesOutput } from "../components/Expense/ExpensesOutput";
 import useExpenses from "../utils/hook/useExpenses";
 import { filterExpensesLast7Days, getDateMinusDays } from "../utils/date";
+import { getExpenses } from "../utils/http/http";
 
 export default function RecentExpenses({ navigation }) {
-  const { expenses } = useExpenses();
+  const { expenses, setExpenses } = useExpenses();
+
+  useEffect(() => {
+    async function fetchExp() {
+      const exp = await getExpenses();
+      setExpenses(exp);
+    }
+    fetchExp();
+    return;
+  }, []);
 
   const recentExp = filterExpensesLast7Days(expenses);
 

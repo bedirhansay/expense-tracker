@@ -23,7 +23,7 @@ export const ExpensesItem = ({ item }) => {
       <View style={styles.itemText}>
         <Text style={styles.itemDescription}>{item.description}</Text>
         <Text style={styles.itemAmount}>{`$${item.amount.toFixed(2)}`}</Text>
-        <Text style={styles.itemDate}>{item.date.toDateString()}</Text>
+        {/* <Text style={styles.itemDate}>{item.date.toDateString()}</Text> */}
       </View>
       {/* <View>
         <Image

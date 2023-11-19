@@ -64,9 +64,7 @@ const ExpenseForm = ({ onSubmit, CancelExpense, isEditing, defaultValues }) => {
         textInputConfig={{
           placeholder: "YYYY-MM-DD",
           maxLength: 10,
-          value: defaultValues
-            ? new Date(defaultValues.date).toISOString().slice(0, 10)
-            : "",
+          value: inputValues.date,
           onChangeText: (text) => inputChangeHandler("date", text),
         }}
       />
