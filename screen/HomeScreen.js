@@ -30,48 +30,46 @@ export const HomeScreen = () => {
   ];
 
   return (
-    <ScrollView>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.userContainer}>
-          <View style={styles.contentWrapper}>
-            <Image
-              style={styles.image}
-              source={require("../assets/images/user.jpg")}
-            />
-            <View>
-              <Text style={styles.userName}>John Doe</Text>
-            </View>
-          </View>
-        </View>
-        {/* //! Current Balance */}
-        <View style={styles.balance}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.userContainer}>
+        <View style={styles.contentWrapper}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/user.jpg")}
+          />
           <View>
-            <Text style={styles.balanceTitle}>Current Balance</Text>
-            <Text style={styles.balanceSubtitle}>Cash Available</Text>
-          </View>
-          <View>
-            <Text style={styles.balanceAmount}>$15,382</Text>
+            <Text style={styles.userName}>John Doe</Text>
           </View>
         </View>
-
-        {/* //! Categories */}
-        <View style={styles.cardContainer}>
-          {categories.map((item, index) => (
-            <View
-              key={index}
-              style={[styles.card, { backgroundColor: item.backgroundColor }]}
-            >
-              <MaterialIcons name={item.icon} size={44} color="white" />
-            </View>
-          ))}
+      </View>
+      {/* //! Current Balance */}
+      <View style={styles.balance}>
+        <View>
+          <Text style={styles.balanceTitle}>Current Balance</Text>
+          <Text style={styles.balanceSubtitle}>Cash Available</Text>
         </View>
-
-        {/* //! recent Expenses */}
-        <View style={styles.recent}>
-          <RecentExpenses />
+        <View>
+          <Text style={styles.balanceAmount}>$15,382</Text>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </View>
+
+      {/* //! Categories */}
+      <View style={styles.cardContainer}>
+        {categories.map((item, index) => (
+          <View
+            key={index}
+            style={[styles.card, { backgroundColor: item.backgroundColor }]}
+          >
+            <MaterialIcons name={item.icon} size={44} color="white" />
+          </View>
+        ))}
+      </View>
+
+      {/* //! recent Expenses */}
+      <View style={styles.recent}>
+        <RecentExpenses />
+      </View>
+    </SafeAreaView>
   );
 };
 

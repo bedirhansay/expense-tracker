@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import IconButton from "../components/ui/IconButton";
 import { Button } from "../components/ui/Button";
 import useExpenses from "../utils/hook/useExpenses";
+import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 
 export default function ManageExpenses({ route, navigation }) {
   const id = route?.params?.id;
@@ -27,11 +28,11 @@ export default function ManageExpenses({ route, navigation }) {
     navigation.goBack();
   }
 
-  function ConfirmExpense() {
+  function ConfirmExpense(expenseData) {
     if (isEditing) {
-      updateExpense();
+      updateExpense(id, expenseData);
     } else {
-      addExpense();
+      addExpense(expenseData);
     }
     navigation.goBack();
   }
@@ -40,12 +41,14 @@ export default function ManageExpenses({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Button onPress={CancelExpense}>Cancel</Button>
-        <Button onPress={ConfirmExpense}>{isEditing ? "Update" : "Add"}</Button>
-      </View>
-      <Text style={styles.title}>Expense Information</Text>
+      <ExpenseForm
+        onSubmit={ConfirmExpense}
+        CancelExpense={CancelExpense}
+        isEditing={isEditing ? "Update" : "Add"}
+      />
+
       <View style={styles.divider} />
+
       {isEditing && (
         <View style={styles.deleteButton}>
           <IconButton name="trash" iconName="trash" onPress={DeleteExpense} />
@@ -61,16 +64,13 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#fff",
   },
+
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
   },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
+
   divider: {
     borderBottomColor: "#ccc",
     borderBottomWidth: 2,

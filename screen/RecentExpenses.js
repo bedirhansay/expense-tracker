@@ -1,5 +1,5 @@
 import React from "react";
-import { ExpensesOutput } from "../components/ExpensesOutput";
+import { ExpensesOutput } from "../components/Expense/ExpensesOutput";
 import useExpenses from "../utils/hook/useExpenses";
 import { filterExpensesLast7Days, getDateMinusDays } from "../utils/date";
 

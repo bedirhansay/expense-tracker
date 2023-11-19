@@ -25,12 +25,12 @@ export const ExpensesItem = ({ item }) => {
         <Text style={styles.itemAmount}>{`$${item.amount.toFixed(2)}`}</Text>
         <Text style={styles.itemDate}>{item.date.toDateString()}</Text>
       </View>
-      <View>
+      {/* <View>
         <Image
           style={styles.logo}
-          source={require("../assets/images/nike.jpg")}
+          source={require("../assets/images/sho.jpg")}
         />
-      </View>
+      </View> */}
     </Pressable>
   );
 };
