@@ -15,7 +15,11 @@ export const Input = ({ label, textInputConfig, icon }) => {
 
       <View style={styles.inputContainer}>
         {icon && <FontAwesome name={icon} size={24} style={styles.icon} />}
-        <TextInput {...textInputConfig} style={inputStyles} />
+        <TextInput
+          {...textInputConfig}
+          style={inputStyles}
+          value={textInputConfig.value}
+        />
       </View>
     </View>
   );

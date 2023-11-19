@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Input } from "../ui/input";
 import { Button } from "../ui/Button";
-const ExpenseForm = ({ onSubmit, CancelExpense, isEditing }) => {
+const ExpenseForm = ({ onSubmit, CancelExpense, isEditing, defaultValues }) => {
   const [inputValues, setInputValues] = useState({
-    amount: "",
-    description: "",
-    date: new Date(),
+    amount: defaultValues ? defaultValues.amount.toString() : "",
+    description: defaultValues ? defaultValues.description : "",
+    date: defaultValues
+      ? new Date(defaultValues.date).toISOString().slice(0, 10)
+      : "",
   });
+
+  console.log(inputValues);
 
   const inputChangeHandler = (identifier, enteredValue) => {
     setInputValues((prevVal) => {
@@ -21,7 +25,7 @@ const ExpenseForm = ({ onSubmit, CancelExpense, isEditing }) => {
   const handleSubmit = () => {
     const expenseData = {
       amount: +inputValues.amount,
-      date: new Date(inputValues.date),
+      date: new Date().toISOString().slice(0, 10),
       description: inputValues.description,
     };
     onSubmit(expenseData);
@@ -39,6 +43,7 @@ const ExpenseForm = ({ onSubmit, CancelExpense, isEditing }) => {
         label={"Amount"}
         icon="money"
         textInputConfig={{
+          value: inputValues.amount,
           keyboardType: "decimal-pad",
           onChangeText: (text) => inputChangeHandler("amount", text),
         }}
@@ -49,6 +54,7 @@ const ExpenseForm = ({ onSubmit, CancelExpense, isEditing }) => {
         icon="font"
         textInputConfig={{
           multiline: true,
+          value: inputValues.description,
           onChangeText: (text) => inputChangeHandler("description", text),
         }}
       />
@@ -58,6 +64,9 @@ const ExpenseForm = ({ onSubmit, CancelExpense, isEditing }) => {
         textInputConfig={{
           placeholder: "YYYY-MM-DD",
           maxLength: 10,
+          value: defaultValues
+            ? new Date(defaultValues.date).toISOString().slice(0, 10)
+            : "",
           onChangeText: (text) => inputChangeHandler("date", text),
         }}
       />

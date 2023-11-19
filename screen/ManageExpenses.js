@@ -4,12 +4,13 @@ import IconButton from "../components/ui/IconButton";
 import { Button } from "../components/ui/Button";
 import useExpenses from "../utils/hook/useExpenses";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
+import validateExpenseData from "../utils/Validation/validateExpenseData";
 
 export default function ManageExpenses({ route, navigation }) {
   const id = route?.params?.id;
   const desc = route.params?.title;
 
-  const { deleteExpense, updateExpense, addExpense } = useExpenses();
+  const { deleteExpense, updateExpense, addExpense, expenses } = useExpenses();
 
   const isEditing = !!id;
 
@@ -29,19 +30,27 @@ export default function ManageExpenses({ route, navigation }) {
   }
 
   function ConfirmExpense(expenseData) {
-    if (isEditing) {
-      updateExpense(id, expenseData);
+    const validation = validateExpenseData(expenseData);
+
+    if (validation.isValid) {
+      if (isEditing) {
+        updateExpense(id, expenseData);
+      } else {
+        addExpense(expenseData);
+      }
+
+      navigation.goBack();
     } else {
-      addExpense(expenseData);
-    }
-    navigation.goBack();
+      console.error(validation.error);
+     }
   }
 
-  const { expenses } = useExpenses();
+  const selectedItem = expenses.find((item) => item.id === id);
 
   return (
     <View style={styles.container}>
       <ExpenseForm
+        defaultValues={selectedItem}
         onSubmit={ConfirmExpense}
         CancelExpense={CancelExpense}
         isEditing={isEditing ? "Update" : "Add"}
