@@ -4,7 +4,12 @@ import IconButton from "../components/ui/IconButton";
 import useExpenses from "../utils/hook/useExpenses";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 import validateExpenseData from "../utils/Validation/validateExpenseData";
-import { storeExpense } from "../utils/http/http";
+import {
+  storeExpense,
+  updateExpenseData,
+  deleteExpense,
+  deleteExpenseData,
+} from "../utils/http/http";
 
 export default function ManageExpenses({ route, navigation }) {
   const id = route?.params?.id;
@@ -20,8 +25,9 @@ export default function ManageExpenses({ route, navigation }) {
     });
   }, [route, navigation, isEditing]);
 
-  function DeleteExpense() {
+  async function DeleteExpense() {
     deleteExpense(id);
+    await deleteExpenseData(id);
     navigation.goBack();
   }
 
@@ -29,15 +35,16 @@ export default function ManageExpenses({ route, navigation }) {
     navigation.goBack();
   }
 
-  function ConfirmExpense(expenseData) {
+  async function ConfirmExpense(expenseData) {
     const validation = validateExpenseData(expenseData);
 
     if (validation.isValid) {
       if (isEditing) {
+        await updateExpenseData(id, expenseData);
         updateExpense(id, expenseData);
       } else {
-        storeExpense(expenseData);
-        addExpense(expenseData);
+        const id = await storeExpense(expenseData);
+        addExpense({ ...expenseData, id });
       }
 
       navigation.goBack();

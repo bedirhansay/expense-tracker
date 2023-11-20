@@ -2,8 +2,10 @@ import axios from "axios";
 
 const Uri = "https://expense-tracker-39a41-default-rtdb.firebaseio.com";
 
-export const storeExpense = (expenseData) => {
-  axios.post(`${Uri}/expenses.json`, expenseData);
+export const storeExpense = async (expenseData) => {
+  const res = await axios.post(`${Uri}/expenses.json`, expenseData);
+  const id = res.data.name;
+  return id;
 };
 
 export const getExpenses = async () => {
@@ -26,3 +28,11 @@ export const getExpenses = async () => {
     console.log(error);
   }
 };
+
+export async function updateExpenseData(id, expenseData) {
+  return axios.put(Uri + `/expenses/${id}.json`, expenseData);
+}
+
+export async function deleteExpenseData(id) {
+  return axios.delete(Uri + `/expenses/${id}.json`);
+}

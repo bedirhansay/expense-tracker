@@ -1,9 +1,10 @@
 export const ExpensesReducer = (state, action) => {
   switch (action.type) {
     case "SET":
-      return action.payload;
+      const reversed = action.payload.reverse();
+      return reversed;
     case "ADD":
-      return [...state, { ...action.payload }];
+      return [...state, ...action.payload];
     case "UPDATE":
       const expensesIndex = state.findIndex(
         (expense) => expense.id === action.payload.id
